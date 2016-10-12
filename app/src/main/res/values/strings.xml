@@ -1,3 +1,4 @@
 <resources>
 	<string name="app_name">CS396-Project3</string>
+	<string name="title_activity_main">MainActivity</string>
 </resources>
