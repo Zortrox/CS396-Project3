@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 						.setAction("Action", null).show();
 			}
 		});
+		fab.setImageResource(R.drawable.ic_plus);
 	}
 
 }
