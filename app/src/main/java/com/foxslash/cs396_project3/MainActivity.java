@@ -4,18 +4,19 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.*;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.*;
 import android.widget.*;
 
 import java.util.ArrayList;
 
-import static android.R.attr.data;
-
-public class MainActivity extends AppCompatActivity {
-
-	Context mainContext = this;
+public class MainActivity extends AppCompatActivity
+		implements NavigationView.OnNavigationItemSelectedListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,18 +26,83 @@ public class MainActivity extends AppCompatActivity {
 		setSupportActionBar(toolbar);
 
 		//add list data
-		final PersonAdapter adapter = new PersonAdapter(new ArrayList<String>(), this);
-		ListView lView = (ListView)findViewById(R.id.person_list);
+		final MainActivity.PersonAdapter adapter = new MainActivity.PersonAdapter(new ArrayList<String>(), this);
+		ListView lView = (ListView)findViewById(R.id.item_list);
 		lView.setAdapter(adapter);
 
-		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+		ImageButton fab = (ImageButton) findViewById(R.id.add_item);
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				adapter.addPerson("Jeffrey");
+				adapter.addItem("Burgah");
 			}
 		});
 
+		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+		drawer.setDrawerListener(toggle);
+		toggle.syncState();
+
+		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+		navigationView.setNavigationItemSelectedListener(this);
+	}
+
+	@Override
+	public void onBackPressed() {
+		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		if (drawer.isDrawerOpen(GravityCompat.START)) {
+			drawer.closeDrawer(GravityCompat.START);
+		} else {
+			super.onBackPressed();
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+
+		//noinspection SimplifiableIfStatement
+		if (id == R.id.action_settings) {
+			return true;
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+
+	@SuppressWarnings("StatementWithEmptyBody")
+	@Override
+	public boolean onNavigationItemSelected(MenuItem item) {
+		// Handle navigation view item clicks here.
+		int id = item.getItemId();
+
+		if (id == R.id.nav_camera) {
+			// Handle the camera action
+		} else if (id == R.id.nav_gallery) {
+
+		} else if (id == R.id.nav_slideshow) {
+
+		} else if (id == R.id.nav_manage) {
+
+		} else if (id == R.id.nav_share) {
+
+		} else if (id == R.id.nav_send) {
+
+		}
+
+		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		drawer.closeDrawer(GravityCompat.START);
+		return true;
 	}
 
 	private class PersonAdapter extends BaseAdapter implements ListAdapter {
@@ -69,57 +135,29 @@ public class MainActivity extends AppCompatActivity {
 			View nowView = convertView;
 			if (nowView == null) {
 				LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				nowView = inflater.inflate(R.layout.person_wrapper, null);
+				nowView = inflater.inflate(R.layout.item_wrapper, null);
 			}
 			final View view = nowView;
 
 			//layout
-			RelativeLayout topLevel = (RelativeLayout)view.findViewById(R.id.person_box);
+			RelativeLayout topLevel = (RelativeLayout)view.findViewById(R.id.item_box);
 			topLevel.setOnClickListener(new View.OnClickListener(){
 				@Override
 				public void onClick(View v) {
-					LinearLayout items = (LinearLayout)view.findViewById(R.id.person_item_list);
-					if (items.getVisibility() == View.VISIBLE) {
-						items.setVisibility(View.GONE);
-					} else {
-						items.setVisibility(View.VISIBLE);
-					}
+
 				}
 			});
 
 			//Change item text
-			TextView listItemText = (TextView)view.findViewById(R.id.person_name);
+			TextView listItemText = (TextView)view.findViewById(R.id.item_name);
 			listItemText.setText(list.get(position));
-
-			//Add item button
-			ImageButton addBtn = (ImageButton)view.findViewById(R.id.person_add_item);
-			addBtn.setOnClickListener(new View.OnClickListener(){
-				@Override
-				public void onClick(View v) {
-					//Toast.makeText(MainActivity.this, "Adding item",
-							//Toast.LENGTH_LONG).show();
-
-					LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-					LinearLayout layout = (LinearLayout)view.findViewById(R.id.person_item_list);
-					View child = inflater.inflate(R.layout.item_wrapper, null);
-					TextView text = (TextView)child.findViewById(R.id.item_name);
-					text.setText("Burger");
-					layout.addView(child);
-
-					layout.setVisibility(View.VISIBLE);
-
-					view.invalidate();
-					notifyDataSetChanged();
-				}
-			});
 
 			return view;
 		}
 
-		public void addPerson(String name) {
+		public void addItem(String name) {
 			list.add(name);
 			notifyDataSetChanged();
 		}
 	}
-
 }

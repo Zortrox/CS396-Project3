@@ -1,10 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent">
-	<TextView
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+	<RelativeLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:id="@+id/item_name"/>
-
+			android:layout_height="89dp" android:layout_gravity="center_horizontal" android:padding="8dp"
+			android:id="@+id/item_box">
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:text="Burger"
+				android:id="@+id/item_name" android:textSize="12pt" android:layout_centerVertical="true"
+				android:layout_alignParentStart="true" android:layout_toStartOf="@+id/item_quantity"
+				android:paddingEnd="15dp"/>
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:text="$15.00"
+				android:id="@+id/item_total"
+				android:inputType="numberDecimal" android:textSize="12pt"
+				android:layout_alignParentBottom="true" android:layout_alignParentEnd="true"/>
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:text="$5.00"
+				android:id="@+id/item_price"
+				android:textSize="12pt"
+				android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:text="3 x "
+				android:id="@+id/item_quantity"
+				android:textSize="12pt"
+				android:layout_alignTop="@+id/item_price" android:layout_toStartOf="@+id/item_price"/>
+	</RelativeLayout>
 </LinearLayout>
