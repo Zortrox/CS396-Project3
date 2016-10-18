@@ -96,17 +96,20 @@ public class MainActivity extends AppCompatActivity {
 			addBtn.setOnClickListener(new View.OnClickListener(){
 				@Override
 				public void onClick(View v) {
-					Toast.makeText(MainActivity.this, "Adding item",
-							Toast.LENGTH_LONG).show();
+					//Toast.makeText(MainActivity.this, "Adding item",
+							//Toast.LENGTH_LONG).show();
 
+					LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 					LinearLayout layout = (LinearLayout)view.findViewById(R.id.person_item_list);
-					View child = getLayoutInflater().inflate(R.layout.item_wrapper, null);
+					View child = inflater.inflate(R.layout.item_wrapper, null);
 					TextView text = (TextView)child.findViewById(R.id.item_name);
 					text.setText("Burger");
 					layout.addView(child);
 
+					layout.setVisibility(View.VISIBLE);
+
+					view.invalidate();
 					notifyDataSetChanged();
-					//expand lower list
 				}
 			});
 
