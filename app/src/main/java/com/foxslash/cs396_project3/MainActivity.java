@@ -1,9 +1,12 @@
 package com.foxslash.cs396_project3;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.app.Fragment;
 import android.view.*;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,18 +28,11 @@ public class MainActivity extends AppCompatActivity
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		//add list data
-		final MainActivity.PersonAdapter adapter = new MainActivity.PersonAdapter(new ArrayList<String>(), this);
-		ListView lView = (ListView)findViewById(R.id.item_list);
-		lView.setAdapter(adapter);
-
-		ImageButton fab = (ImageButton) findViewById(R.id.add_item);
-		fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				adapter.addItem("Burgah");
-			}
-		});
+		//setup initial fragment
+		Fragment fragment = new fragMenu();
+		FragmentManager fragmentManager = getFragmentManager();
+		fragmentManager.beginTransaction()
+				.add(R.id.content_main, fragment).commit();
 
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -58,47 +54,25 @@ public class MainActivity extends AppCompatActivity
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
-
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public boolean onNavigationItemSelected(MenuItem item) {
 		// Handle navigation view item clicks here.
 		int id = item.getItemId();
 
-		if (id == R.id.nav_camera) {
-			// Handle the camera action
-		} else if (id == R.id.nav_gallery) {
+		Fragment fragment;
+		FragmentManager fragmentManager = getFragmentManager();
 
-		} else if (id == R.id.nav_slideshow) {
-
-		} else if (id == R.id.nav_manage) {
-
-		} else if (id == R.id.nav_share) {
-
-		} else if (id == R.id.nav_send) {
-
+		if (id == R.id.nav_orders) {
+			fragment = new fragOrders();
+		} else if (id == R.id.nav_menu) {
+			fragment = new fragMenu();
+		} else {
+			fragment = new Fragment();
 		}
+		fragmentManager.beginTransaction()
+				.replace(R.id.content_main, fragment)
+				.commit();
 
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawer.closeDrawer(GravityCompat.START);
@@ -160,4 +134,29 @@ public class MainActivity extends AppCompatActivity
 			notifyDataSetChanged();
 		}
 	}
+
+	public static class fragOrders extends Fragment {
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+								 Bundle savedInstanceState) {
+			return inflater.inflate(R.layout.frag_orders, container, false);
+		}
+
+		@Override
+		public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+			super.onViewCreated(view, savedInstanceState);
+		}
+	}
+	public static class fragMenu extends Fragment {
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+								 Bundle savedInstanceState) {
+			return inflater.inflate(R.layout.frag_menu, container, false);
+		}
+		@Override
+		public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+			super.onViewCreated(view, savedInstanceState);
+		}
+	}
 }
+
