@@ -21,6 +21,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
 
+	private ArrayList<String> listOrders = new ArrayList<>();
+	private Fragment fragment = null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,7 +32,10 @@ public class MainActivity extends AppCompatActivity
 		setSupportActionBar(toolbar);
 
 		//setup initial fragment
-		Fragment fragment = new fragMenu();
+		fragment = new FragMenu();
+		Bundle bundle = new Bundle();
+		bundle.putStringArrayList("orders", listOrders);
+		fragment.setArguments(bundle);
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager.beginTransaction()
 				.add(R.id.content_main, fragment).commit();
@@ -60,13 +66,23 @@ public class MainActivity extends AppCompatActivity
 		// Handle navigation view item clicks here.
 		int id = item.getItemId();
 
-		Fragment fragment;
 		FragmentManager fragmentManager = getFragmentManager();
+		if (fragment instanceof FragOrders) {
+			listOrders = ((FragOrders) fragment).getOrder();
+		} else if (fragment instanceof FragMenu) {
+			listOrders = ((FragMenu) fragment).getOrder();
+		}
 
 		if (id == R.id.nav_orders) {
-			fragment = new fragOrders();
+			fragment = new FragOrders();
+			Bundle bundle = new Bundle();
+			bundle.putStringArrayList("orders", listOrders);
+			fragment.setArguments(bundle);
 		} else if (id == R.id.nav_menu) {
-			fragment = new fragMenu();
+			fragment = new FragMenu();
+			Bundle bundle = new Bundle();
+			bundle.putStringArrayList("orders", listOrders);
+			fragment.setArguments(bundle);
 		} else {
 			fragment = new Fragment();
 		}
@@ -79,84 +95,5 @@ public class MainActivity extends AppCompatActivity
 		return true;
 	}
 
-	private class PersonAdapter extends BaseAdapter implements ListAdapter {
-		private ArrayList<String> list = new ArrayList<String>();
-		private Context context;
-
-		public PersonAdapter(ArrayList<String> list, Context context) {
-			this.list = list;
-			this.context = context;
-		}
-
-		@Override
-		public int getCount() {
-			return list.size();
-		}
-
-		@Override
-		public Object getItem(int pos) {
-			return list.get(pos);
-		}
-
-		@Override
-		public long getItemId(int pos) {
-			//return list.get(pos).getId();
-			return 0;
-		}
-
-		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
-			View nowView = convertView;
-			if (nowView == null) {
-				LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				nowView = inflater.inflate(R.layout.item_wrapper, null);
-			}
-			final View view = nowView;
-
-			//layout
-			RelativeLayout topLevel = (RelativeLayout)view.findViewById(R.id.item_box);
-			topLevel.setOnClickListener(new View.OnClickListener(){
-				@Override
-				public void onClick(View v) {
-
-				}
-			});
-
-			//Change item text
-			TextView listItemText = (TextView)view.findViewById(R.id.item_name);
-			listItemText.setText(list.get(position));
-
-			return view;
-		}
-
-		public void addItem(String name) {
-			list.add(name);
-			notifyDataSetChanged();
-		}
-	}
-
-	public static class fragOrders extends Fragment {
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-								 Bundle savedInstanceState) {
-			return inflater.inflate(R.layout.frag_orders, container, false);
-		}
-
-		@Override
-		public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-			super.onViewCreated(view, savedInstanceState);
-		}
-	}
-	public static class fragMenu extends Fragment {
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-								 Bundle savedInstanceState) {
-			return inflater.inflate(R.layout.frag_menu, container, false);
-		}
-		@Override
-		public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-			super.onViewCreated(view, savedInstanceState);
-		}
-	}
 }
 
