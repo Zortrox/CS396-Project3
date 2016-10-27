@@ -48,7 +48,8 @@ public class FragOrders extends Fragment {
 			boolean itemFound = false;
 			for (int k = 0; k < items.size(); k++) {
 				OrderItem tempItem = items.get(k);
-				if (tempItem.getName() == listOrders.get(i)) {
+				String name = listOrders.get(i).substring(0, listOrders.get(i).indexOf('$'));
+				if (tempItem.getName().equals(name)) {
 					itemFound = true;
 					tempItem.setQuantity(tempItem.getQuantity() + 1);
 				}
@@ -57,10 +58,11 @@ public class FragOrders extends Fragment {
 				String strData = listOrders.get(i);
 
 				String name = strData.substring(0, strData.indexOf('$'));
+				String price = strData.substring(strData.indexOf('$'));
 
-				//GET PRICE
+				Double p = Double.valueOf(price.substring(1));
 
-				items.add(new OrderItem(strData))
+				items.add(new OrderItem(name, p));
 			}
 		}
 

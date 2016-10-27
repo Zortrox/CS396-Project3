@@ -38,7 +38,9 @@ public class FragMenu extends Fragment {
 			@Override
 			public void onClick(View v) {
 				String name = ((TextView) fragView.findViewById(R.id.text_food_1)).getText().toString();
-				listOrders.add(name);
+				String price = ((TextView) fragView.findViewById(R.id.text_price_1)).getText().toString();
+				String item = name + price;
+				listOrders.add(item);
 			}
 		});
 
@@ -47,7 +49,9 @@ public class FragMenu extends Fragment {
 			@Override
 			public void onClick(View v) {
 				String name = ((TextView) fragView.findViewById(R.id.text_food_2)).getText().toString();
-				listOrders.add(name);
+				String price = ((TextView) fragView.findViewById(R.id.text_price_2)).getText().toString();
+				String item = name + price;
+				listOrders.add(item);
 			}
 		});
 
@@ -56,7 +60,9 @@ public class FragMenu extends Fragment {
 			@Override
 			public void onClick(View v) {
 				String name = ((TextView) fragView.findViewById(R.id.text_food_3)).getText().toString();
-				listOrders.add(name);
+				String price = ((TextView) fragView.findViewById(R.id.text_price_3)).getText().toString();
+				String item = name + price;
+				listOrders.add(item);
 			}
 		});
 
@@ -65,7 +71,9 @@ public class FragMenu extends Fragment {
 			@Override
 			public void onClick(View v) {
 				String name = ((TextView) fragView.findViewById(R.id.text_food_4)).getText().toString();
-				listOrders.add(name);
+				String price = ((TextView) fragView.findViewById(R.id.text_price_4)).getText().toString();
+				String item = name + price;
+				listOrders.add(item);
 			}
 		});
 	}

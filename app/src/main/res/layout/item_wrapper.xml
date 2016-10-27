@@ -35,9 +35,10 @@ android:layout_height="wrap_content">
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textAppearance="?android:attr/textAppearanceLarge"
-				android:text="3 x "
+				android:text="3 x"
 				android:id="@+id/item_quantity"
 				android:textSize="12pt"
-				android:layout_alignTop="@+id/item_price" android:layout_toStartOf="@+id/item_price"/>
+				android:layout_alignTop="@+id/item_price" android:layout_toStartOf="@+id/item_price"
+				android:layout_marginRight="6dp"/>
 	</RelativeLayout>
 </LinearLayout>
