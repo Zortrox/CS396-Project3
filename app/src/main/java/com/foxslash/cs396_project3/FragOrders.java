@@ -63,6 +63,7 @@ public class FragOrders extends Fragment {
 				Double p = Double.valueOf(price.substring(1));
 
 				items.add(new OrderItem(name, p));
+				items.get(items.size() - 1).setQuantity(1);
 			}
 		}
 

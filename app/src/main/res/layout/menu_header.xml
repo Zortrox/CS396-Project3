@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="50dp" android:background="@color/colorPrimaryDark">
+
+	<TextView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="HEADING"
+			android:id="@+id/text_heading" android:gravity="center_vertical" android:layout_marginLeft="20dp"
+			android:textColor="@android:color/white" android:textStyle="bold" android:textSize="30dp"/>
+</LinearLayout>
