@@ -6,18 +6,17 @@ package com.foxslash.cs396_project3;
 
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -48,20 +47,20 @@ public class FragMenu extends Fragment {
 		listMenu.add(new OrderItem("Baron Rutherford", 8, "Walnuts, apples, blue cheese crumbles, raspberry vinaigrette"));
 
 		listMenu.add(new OrderItem("HOT SOUPS"));
-		listMenu.add(new OrderItem("Red Pepper Bisque", 3, "An eruption of savory flavors made in-house daily"));
-		listMenu.add(new OrderItem("Seafood Bisque", 3, "An eruption of savory flavors made in-house daily"));
-		listMenu.add(new OrderItem("Seasonal", 3, "An eruption of savory flavors made in-house daily"));
-		listMenu.add(new OrderItem("Red Pepper Bisque", 5, "An eruption of savory flavors made in-house daily"));
-		listMenu.add(new OrderItem("Seafood Bisque", 5, "An eruption of savory flavors made in-house daily"));
-		listMenu.add(new OrderItem("Seasonal", 5, "An eruption of savory flavors made in-house daily"));
+		listMenu.add(new OrderItem("Red Pepper Bisque (Cup)", 3, "An eruption of savory flavors made in-house daily"));
+		listMenu.add(new OrderItem("Seafood Bisque (Cup)", 3, "An eruption of savory flavors made in-house daily"));
+		listMenu.add(new OrderItem("Seasonal (Cup)", 3, "An eruption of savory flavors made in-house daily"));
+		listMenu.add(new OrderItem("Red Pepper Bisque (Bowl)", 5, "An eruption of savory flavors made in-house daily"));
+		listMenu.add(new OrderItem("Seafood Bisque (Bowl)", 5, "An eruption of savory flavors made in-house daily"));
+		listMenu.add(new OrderItem("Seasonal (Bowl)", 5, "An eruption of savory flavors made in-house daily"));
 
 		listMenu.add(new OrderItem("WRIGHT BROS. BONELESS"));
-		listMenu.add(new OrderItem("Bird Dog Bourbon BBQ", 7, "One bite and you’ll see why these are “Wright” for you. Served with house-made ranch or blue cheese"));
-		listMenu.add(new OrderItem("Buffalo", 7, "One bite and you’ll see why these are “Wright” for you. Served with house-made ranch or blue cheese"));
-		listMenu.add(new OrderItem("Sweet Thai Chili", 7, "One bite and you’ll see why these are “Wright” for you. Served with house-made ranch or blue cheese"));
-		listMenu.add(new OrderItem("Bird Dog Bourbon BBQ", 9, "One bite and you’ll see why these are “Wright” for you. Served with house-made ranch or blue cheese"));
-		listMenu.add(new OrderItem("Buffalo", 9, "One bite and you’ll see why these are “Wright” for you. Served with house-made ranch or blue cheese"));
-		listMenu.add(new OrderItem("Sweet Thai Chili", 9, "One bite and you’ll see why these are “Wright” for you. Served with house-made ranch or blue cheese"));
+		listMenu.add(new OrderItem("Bird Dog Bourbon BBQ (Wings)", 7, "One bite and you’ll see why these are “Wright” for you. Served with house-made ranch or blue cheese"));
+		listMenu.add(new OrderItem("Buffalo (Wings)", 7, "One bite and you’ll see why these are “Wright” for you. Served with house-made ranch or blue cheese"));
+		listMenu.add(new OrderItem("Sweet Thai Chili (Wings)", 7, "One bite and you’ll see why these are “Wright” for you. Served with house-made ranch or blue cheese"));
+		listMenu.add(new OrderItem("Bird Dog Bourbon BBQ (Tenders)", 9, "One bite and you’ll see why these are “Wright” for you. Served with house-made ranch or blue cheese"));
+		listMenu.add(new OrderItem("Buffalo (Tenders)", 9, "One bite and you’ll see why these are “Wright” for you. Served with house-made ranch or blue cheese"));
+		listMenu.add(new OrderItem("Sweet Thai Chili (Tenders)", 9, "One bite and you’ll see why these are “Wright” for you. Served with house-made ranch or blue cheese"));
 
 		listMenu.add(new OrderItem("BRILLIANT BURGERS"));
 		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
@@ -132,7 +131,7 @@ public class FragMenu extends Fragment {
 				//Food item
 				final View child = inflater.inflate(R.layout.menu_wrapper, layout, false);
 
-				TextView txtName = (TextView) child.findViewById(R.id.text_name);
+				final TextView txtName = (TextView) child.findViewById(R.id.text_name);
 				txtName.setText(tempItem.getName());
 
 				NumberFormat formatter = NumberFormat.getCurrencyInstance();
@@ -146,8 +145,11 @@ public class FragMenu extends Fragment {
 				btnAdd.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						tempItem.setQuantity(tempItem.getQuantity() + 1);
-						txtQty.setText(String.valueOf(tempItem.getQuantity()));
+						int qty = tempItem.getQuantity();
+						if (qty < 99) {
+							tempItem.setQuantity(tempItem.getQuantity() + 1);
+							txtQty.setText(String.valueOf(tempItem.getQuantity()));
+						}
 					}
 				});
 
@@ -175,7 +177,8 @@ public class FragMenu extends Fragment {
 							tempItem.setQuantity(0);
 						} else {
 							int qty = Integer.valueOf(s.toString());
-							if (qty >= 0) tempItem.setQuantity(qty);
+							if (qty >= 0 && qty <= 99) tempItem.setQuantity(qty);
+							else if (qty > 99) tempItem.setQuantity(99);
 							else tempItem.setQuantity(0);
 						}
 					}
@@ -183,6 +186,39 @@ public class FragMenu extends Fragment {
 					@Override
 					public void afterTextChanged(Editable s) {
 
+					}
+				});
+
+				RelativeLayout descBox = (RelativeLayout) child.findViewById(R.id.click_desc);
+
+				descBox.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+						LayoutInflater inflater = LayoutInflater.from(getActivity());
+						final View dialogView = inflater.inflate(R.layout.dialog_view_desc, null);
+
+						builder.setView(dialogView);
+
+						String name = txtName.getText().toString();
+						String desc = "";
+						for (int i = 0; i < listMenu.size(); i++) {
+							if (name.equals(listMenu.get(i).getName())) {
+								desc = listMenu.get(i).getDesc();
+							}
+						}
+
+						((TextView) dialogView.findViewById(R.id.food_name)).setText(name);
+						((TextView) dialogView.findViewById(R.id.food_desc)).setText(desc);
+
+						builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.cancel();
+							}
+						});
+
+						builder.create().show();
 					}
 				});
 

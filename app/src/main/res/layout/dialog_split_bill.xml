@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="Edit Item"
+			android:id="@+id/label_heading" android:layout_alignParentTop="true" android:layout_alignParentStart="true"
+			android:layout_alignParentEnd="true"
+			android:background="#70afc5" android:padding="10dp"/>
+	<NumberPicker
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/number_picker"
+			android:orientation="vertical"
+			android:layout_below="@+id/label_size" android:layout_alignParentStart="true"
+			android:layout_marginTop="10dp" android:layout_marginLeft="20dp" android:layout_marginBottom="20dp"/>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:text="Party size:"
+			android:id="@+id/label_size"
+			android:layout_below="@+id/label_heading" android:layout_alignParentStart="true"
+			android:layout_marginTop="10dp" android:layout_marginLeft="10dp"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Cost per person:"
+			  android:id="@+id/label_costs"
+			  android:layout_marginLeft="10dp"
+			  android:layout_marginEnd="69dp" android:layout_alignTop="@+id/label_size"
+			  android:layout_alignEnd="@+id/list_costs"/>
+	<ListView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/list_costs"
+			android:layout_alignParentEnd="true" android:layout_toEndOf="@+id/number_picker"
+			android:layout_alignTop="@+id/number_picker"
+			android:layout_marginLeft="20dp" android:layout_alignBottom="@+id/number_picker"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Total:"
+			  android:id="@+id/textView4"
+			  android:layout_marginLeft="20dp"
+			  android:layout_below="@+id/list_costs" android:layout_alignStart="@+id/list_costs"
+			  android:layout_marginTop="20dp"/>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="$18.34"
+			android:id="@+id/text_total" android:layout_below="@+id/list_costs" android:layout_toEndOf="@+id/textView4"
+			android:layout_marginTop="18dp" android:layout_marginLeft="5dp" android:layout_marginBottom="20dp"/>
+</RelativeLayout>

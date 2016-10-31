@@ -4,14 +4,12 @@
 
 package com.foxslash.cs396_project3;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -51,27 +49,18 @@ public class OrderAdapter extends BaseAdapter implements ListAdapter {
 		}
 		final View view = nowView;
 
-		//layout
-		RelativeLayout topLevel = (RelativeLayout)view.findViewById(R.id.item_box);
-		topLevel.setOnClickListener(new View.OnClickListener(){
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
-
 		//Change item data
 		NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
-		TextView listItemName = (TextView)view.findViewById(R.id.item_name);
+		TextView listItemName = (TextView)view.findViewById(R.id.label_customer);
 		listItemName.setText(listOrders.get(position).getName());
 
-		TextView listItemPrice = (TextView)view.findViewById(R.id.item_price);
+		TextView listItemPrice = (TextView)view.findViewById(R.id.text_charge);
 		String strPrice = formatter.format(listOrders.get(position).getPrice());
 		listItemPrice.setText(strPrice);
 
 		TextView listItemQuantity = (TextView)view.findViewById(R.id.item_quantity);
-		String strQuantity = "" + listOrders.get(position).getQuantity() + " x";
+		String strQuantity = String.valueOf(listOrders.get(position).getQuantity());
 		listItemQuantity.setText(strQuantity);
 
 		TextView listItemTotal = (TextView)view.findViewById(R.id.item_total);
@@ -79,5 +68,10 @@ public class OrderAdapter extends BaseAdapter implements ListAdapter {
 		listItemTotal.setText(strTotal);
 
 		return view;
+	}
+
+	public void removeItem(int position) {
+		listOrders.remove(position);
+		notifyDataSetChanged();
 	}
 }

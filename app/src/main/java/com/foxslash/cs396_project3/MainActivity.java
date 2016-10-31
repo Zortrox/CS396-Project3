@@ -1,11 +1,7 @@
 package com.foxslash.cs396_project3;
 
 import android.app.FragmentManager;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.app.Fragment;
 import android.view.*;
 import android.support.design.widget.NavigationView;
@@ -14,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.*;
 
 import java.util.ArrayList;
 
@@ -67,14 +62,14 @@ public class MainActivity extends AppCompatActivity
 		int id = item.getItemId();
 
 		FragmentManager fragmentManager = getFragmentManager();
-		if (fragment instanceof FragOrders) {
-			listOrders = ((FragOrders) fragment).getOrder();
+		if (fragment instanceof FragOrder) {
+			listOrders = ((FragOrder) fragment).getOrder();
 		} else if (fragment instanceof FragMenu) {
 			listOrders = ((FragMenu) fragment).getOrder();
 		}
 
 		if (id == R.id.nav_orders) {
-			fragment = new FragOrders();
+			fragment = new FragOrder();
 			Bundle bundle = new Bundle();
 			bundle.putStringArrayList("orders", listOrders);
 			fragment.setArguments(bundle);
