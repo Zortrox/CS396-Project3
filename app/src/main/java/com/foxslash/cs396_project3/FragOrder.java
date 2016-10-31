@@ -260,6 +260,7 @@ public class FragOrder extends Fragment {
 					}
 				});
 
+				//calculate initial tip
 				seek.setProgress(15);
 
 				builder.create().show();
