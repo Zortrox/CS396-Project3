@@ -63,38 +63,38 @@ public class FragMenu extends Fragment {
 		listMenu.add(new OrderItem("Sweet Thai Chili (Tenders)", 9, "One bite and you’ll see why these are “Wright” for you. Served with house-made ranch or blue cheese"));
 
 		listMenu.add(new OrderItem("BRILLIANT BURGERS"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
+		listMenu.add(new OrderItem("Schrodinger", 8, "Both a classic cheeseburger and a burger with cheese at the same time"));
+		listMenu.add(new OrderItem("Lovelace", 10, "Jalapeno slices, cheddar, beer battered onion ring, house-made Bird Dog Bourbon BBQ sauce"));
+		listMenu.add(new OrderItem("Jobs", 10, "Not available on the app store: Avocado, bacon, egg, cheddar cheese, mayo"));
+		listMenu.add(new OrderItem("Chakkapak", 11, "In honor of the world’s favorite sauce! Savory sriracha mayo, bacon, chipotle gouda, caramelized onion"));
+		listMenu.add(new OrderItem("1-UP", 11, "Need an extra life? Mushroom, caramelized onion, tomato, swiss Go green, and we’ll hold the meat"));
 
 		listMenu.add(new OrderItem("SAVORY SAMMICHES"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
+		listMenu.add(new OrderItem("Bell's BLT", 8, "Practically calling your name. Bacon, lettuce, tomato, mayo"));
+		listMenu.add(new OrderItem("Inventor's Club", 9, "Ham, turkey, bacon, cheddar cheese, lettuce, tomato, mayo"));
+		listMenu.add(new OrderItem("E=m(cheese)²", 7, "Grilled cheese, pick two: American, cheddar, swiss chipotle gouda, pepper jack"));
+		listMenu.add(new OrderItem("Kermit's Revenge", 10, "Bird Dog bourbon BBQ pulled pork with Asian inspired slaw"));
+		listMenu.add(new OrderItem("Spaceballs", 10, "May the schwartz be with you. House-made meatballs, mozzarella"));
 
 		listMenu.add(new OrderItem("WONDERFUL WRAPS"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
+		listMenu.add(new OrderItem("Turing's Turkey", 9, "Programmed to solve your hunger. Turkey, lettuce, cheddar cheese, tomato, house made ranch"));
+		listMenu.add(new OrderItem("Avocado & Bacon", 9, "Superfood + bacon = the perfect combo? Bacon, avocado, cheddar cheese, lettuce, house made ranch"));
+		listMenu.add(new OrderItem("Teddy's Veggie", 9, "Named after Theophrastus, the OG vegetarian: Avocado, lettuce, tomato, red onion, green pepper, swiss, sriracha mayo"));
 
-		listMenu.add(new OrderItem("FLATBREAD PERSONAL PIZZAS"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
+		listMenu.add(new OrderItem("PERSONAL PIZZAS"));
+		listMenu.add(new OrderItem("Big Dipper", 9, "Predictably yummy bites of spinach artichoke dip & mozz"));
+		listMenu.add(new OrderItem("Tatonka", 10, "Costner’s favorite: Fried chicken, buffalo sauce, ranch, mozzarella"));
+		listMenu.add(new OrderItem("Pott's Popper", 9, "Jalapeno slices, spicy cheese sauce, bacon, mozzarella"));
+		listMenu.add(new OrderItem("Eureka!", 10, "This grilled chicken & caesar pizza is worth its weight in gold"));
 
 		listMenu.add(new OrderItem("SIGNATURE ENTREES"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
-		listMenu.add(new OrderItem("Patent House", 6, "Our signature salad, lettuce, cucumber, cheese, tomato, croutons"));
+		listMenu.add(new OrderItem("Alfred's Alfredo", 12, "From the Wayne cookbook, add Chicken or Shrimp, Gotham in need? Go blackened"));
+		listMenu.add(new OrderItem("Iron Lady", 14, "Delicous beer battered fish and chips, served with cole slaw"));
+		listMenu.add(new OrderItem("Sir Isaac", 18, "Chicken fingers over brown sugar & bacon waffles with our own apple bourbon maple syrup"));
+		listMenu.add(new OrderItem("String Theory", 16, "Spaghetti & house-made, never frozen meatballs with marinara"));
+		listMenu.add(new OrderItem("The Other Tyson", 13, "Grilled chicken, pick a topping: BBQ, Raspberry, Parmesan, or Cheesy Jalapeno"));
+		listMenu.add(new OrderItem("Surf n' Turf", 19, "Grilled grouper loaded with our signature crab stuffing"));
+		listMenu.add(new OrderItem("Bourbon Salmon", 17, "Fresh, hand-cut, 7oz filet marinated in our secret Bird Dog Bourbon recipe"));
 
 		//get quantity for each item
 		for (int i = 0; i < listOrders.size(); i++) {
