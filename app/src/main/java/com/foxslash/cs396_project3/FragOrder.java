@@ -202,6 +202,11 @@ public class FragOrder extends Fragment {
 					public void onTextChanged(CharSequence s, int start, int before, int count) {
 						//get tip amount & convert to double
 						String tip = ((TextView) dialogView.findViewById(R.id.text_tip_dollars)).getText().toString();
+
+						//make sure tip amount is formatted correctly
+						if (tip.equals("$") || tip.equals("")) tip = "$0";
+						if (tip.charAt(0) != '$') tip = "$" + tip;
+
 						double dblTip = Double.valueOf(tip.substring(1));
 
 						//get total + tax
@@ -215,7 +220,8 @@ public class FragOrder extends Fragment {
 
 					@Override
 					public void afterTextChanged(Editable s) {
-
+						//make sure dollar sign is shown on tip amount
+						if (s.charAt(0) != '$') s.insert(0, "$");
 					}
 				});
 
