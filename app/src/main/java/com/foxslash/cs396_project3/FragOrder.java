@@ -210,7 +210,7 @@ public class FragOrder extends Fragment {
 						double dblTip = Double.valueOf(tip.substring(1));
 
 						//get total + tax
-						double dblTotal = (subtotal + dblTip) * 1.06;
+						double dblTotal = subtotal * 1.06  + dblTip;
 
 						//set total textview
 						NumberFormat formatter = NumberFormat.getCurrencyInstance();
@@ -221,7 +221,7 @@ public class FragOrder extends Fragment {
 					@Override
 					public void afterTextChanged(Editable s) {
 						//make sure dollar sign is shown on tip amount
-						if (s.charAt(0) != '$') s.insert(0, "$");
+						if (s.length() > 0 && s.charAt(0) != '$') s.insert(0, "$");
 					}
 				});
 
