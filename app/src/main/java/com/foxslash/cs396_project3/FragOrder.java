@@ -85,7 +85,7 @@ public class FragOrder extends Fragment {
 						((TextView) innerView.findViewById(R.id.item_quantity)).setText(String.valueOf(qty));
 
 						//set the total price (qty * price) for the order item
-						String price = ((TextView) innerView.findViewById(R.id.text_charge)).getText().toString();
+						String price = ((TextView) innerView.findViewById(R.id.item_price)).getText().toString();
 						NumberFormat formatter = NumberFormat.getCurrencyInstance();
 						String total = formatter.format(qty * Double.valueOf(price.substring(1)));
 						((TextView) innerView.findViewById(R.id.item_total)).setText(total);
