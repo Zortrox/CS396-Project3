@@ -13,7 +13,7 @@ android:descendantFocusability="blocksDescendants">
 				android:layout_height="wrap_content"
 				android:textAppearance="?android:attr/textAppearanceLarge"
 				android:text="Burger"
-				android:id="@+id/label_customer" android:textSize="12pt" android:layout_centerVertical="true"
+				android:id="@+id/item_name" android:textSize="12pt" android:layout_centerVertical="true"
 				android:layout_alignParentStart="true" android:layout_toStartOf="@+id/item_quantity"
 				android:paddingEnd="15dp"
 				android:scrollHorizontally="true"
@@ -32,7 +32,7 @@ android:descendantFocusability="blocksDescendants">
 				android:layout_height="wrap_content"
 				android:textAppearance="?android:attr/textAppearanceLarge"
 				android:text="$5.00"
-				android:id="@+id/text_charge"
+				android:id="@+id/item_price"
 				android:textSize="12pt"
 				android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
 		<TextView
@@ -42,7 +42,7 @@ android:descendantFocusability="blocksDescendants">
 				android:text="3"
 				android:id="@+id/item_quantity"
 				android:textSize="12pt"
-				android:layout_marginRight="6dp" android:layout_alignTop="@+id/text_charge"
+				android:layout_marginRight="6dp" android:layout_alignTop="@+id/item_price"
 				android:layout_toStartOf="@+id/label_times"/>
 		<TextView
 				android:layout_width="wrap_content"
@@ -52,6 +52,6 @@ android:descendantFocusability="blocksDescendants">
 				android:id="@+id/label_times"
 				android:textSize="12pt"
 				android:layout_marginRight="6dp"
-				android:layout_alignTop="@+id/text_charge" android:layout_toStartOf="@+id/text_charge"/>
+				android:layout_alignTop="@+id/item_price" android:layout_toStartOf="@+id/item_price"/>
 	</RelativeLayout>
 </LinearLayout>

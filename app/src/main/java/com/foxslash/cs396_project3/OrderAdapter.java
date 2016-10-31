@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+//adapter to add custom layout to customer order listview
 public class OrderAdapter extends BaseAdapter implements ListAdapter {
 	private Context context;
 	private ArrayList<OrderItem> listOrders = null;
@@ -40,6 +41,7 @@ public class OrderAdapter extends BaseAdapter implements ListAdapter {
 		return 0;
 	}
 
+	//create custom layout
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		View nowView = convertView;
@@ -49,20 +51,24 @@ public class OrderAdapter extends BaseAdapter implements ListAdapter {
 		}
 		final View view = nowView;
 
-		//Change item data
+		//create currency formatter
 		NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
-		TextView listItemName = (TextView)view.findViewById(R.id.label_customer);
+		//set new food item name
+		TextView listItemName = (TextView)view.findViewById(R.id.item_name);
 		listItemName.setText(listOrders.get(position).getName());
 
-		TextView listItemPrice = (TextView)view.findViewById(R.id.text_charge);
+		//set new food item price
+		TextView listItemPrice = (TextView)view.findViewById(R.id.item_price);
 		String strPrice = formatter.format(listOrders.get(position).getPrice());
 		listItemPrice.setText(strPrice);
 
+		//set new quantity ordered
 		TextView listItemQuantity = (TextView)view.findViewById(R.id.item_quantity);
 		String strQuantity = String.valueOf(listOrders.get(position).getQuantity());
 		listItemQuantity.setText(strQuantity);
 
+		//set total cost for item (quantity * price)
 		TextView listItemTotal = (TextView)view.findViewById(R.id.item_total);
 		String strTotal = formatter.format(listOrders.get(position).getPrice() * listOrders.get(position).getQuantity());
 		listItemTotal.setText(strTotal);
@@ -70,6 +76,7 @@ public class OrderAdapter extends BaseAdapter implements ListAdapter {
 		return view;
 	}
 
+	//remove an item from the listview
 	public void removeItem(int position) {
 		listOrders.remove(position);
 		notifyDataSetChanged();

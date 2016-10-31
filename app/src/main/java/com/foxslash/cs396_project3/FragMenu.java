@@ -22,6 +22,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.zip.Inflater;
 
+//fragment to display all menu items and their headings
 public class FragMenu extends Fragment {
 	ArrayList<String> listOrders = null;
 	ArrayList<OrderItem> listMenu = new ArrayList<>();
@@ -29,10 +30,11 @@ public class FragMenu extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
+		//get order list argument to update quantities
 		Bundle bundle = getArguments();
 		listOrders = bundle.getStringArrayList("orders");
 
-		//create menu
+		//add menu items & headings
 		listMenu.add(new OrderItem("APPETIZERS"));
 		listMenu.add(new OrderItem("Fried Mozzarella", 7, "So cheesy, it doesn't really need a pun. Fresh, hand breaded"));
 		listMenu.add(new OrderItem("Beer Battered Pickles", 5, "A Jedi told us these are the pickles you are looking for"));
@@ -97,11 +99,15 @@ public class FragMenu extends Fragment {
 		listMenu.add(new OrderItem("Bourbon Salmon", 17, "Fresh, hand-cut, 7oz filet marinated in our secret Bird Dog Bourbon recipe"));
 
 		//get quantity for each item
+		//for when user edited order on order screen
 		for (int i = 0; i < listOrders.size(); i++) {
 			for (int j = 0; j < listMenu.size(); j++) {
+				//if the menu item isn't a section heading
 				if (!listMenu.get(j).isSection()) {
+					//and the name is equal to an item already in the order
 					String name = listOrders.get(i).substring(0, listOrders.get(i).indexOf('$'));
 					if (listMenu.get(j).getName().equals(name)) {
+						//increase the quantity
 						listMenu.get(j).setQuantity(listMenu.get(j).getQuantity() + 1);
 					}
 				}
@@ -110,61 +116,77 @@ public class FragMenu extends Fragment {
 
 		return inflater.inflate(R.layout.frag_menu, container, false);
 	}
+
+	//inflate menu items and add listeners
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
+		//get linear layout from fragment xml
 		LinearLayout layout = (LinearLayout) view.findViewById(R.id.menu_items);
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
 		for (int i = 0; i < listMenu.size(); i++) {
+			//get order item
 			final OrderItem tempItem = listMenu.get(i);
 
 			if (tempItem.isSection()) {
-				//Section heading
+				//SECTION HEADING
 				final View child = inflater.inflate(R.layout.menu_header, layout, false);
 
+				//set heading name textview
 				TextView txtName = (TextView) child.findViewById(R.id.text_heading);
 				txtName.setText(tempItem.getName());
 
+				//add to linear layout menu
 				layout.addView(child);
 			} else {
-				//Food item
+				//FOOD ITEM
 				final View child = inflater.inflate(R.layout.menu_wrapper, layout, false);
 
+				//set name for menu item
 				final TextView txtName = (TextView) child.findViewById(R.id.text_name);
 				txtName.setText(tempItem.getName());
 
+				//set price for menu item
 				NumberFormat formatter = NumberFormat.getCurrencyInstance();
 				TextView txtPrice = (TextView) child.findViewById(R.id.text_price);
 				txtPrice.setText(formatter.format(tempItem.getPrice()));
 
+				//set quantity for menu item
 				final TextView txtQty = (TextView) child.findViewById(R.id.text_qty);
 				txtQty.setText(String.valueOf(tempItem.getQuantity()));
 
+				//add click listener for button to increase quantity
 				ImageButton btnAdd = (ImageButton) child.findViewById(R.id.add_food);
 				btnAdd.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						//don't let quantity be greater than 99
 						int qty = tempItem.getQuantity();
 						if (qty < 99) {
+							//update quantity in object and textview
 							tempItem.setQuantity(tempItem.getQuantity() + 1);
 							txtQty.setText(String.valueOf(tempItem.getQuantity()));
 						}
 					}
 				});
 
+				//add click listener for button to decrease quantity
 				ImageButton btnSub = (ImageButton) child.findViewById(R.id.sub_food);
 				btnSub.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						//don't let quantity be less than 0
 						int qty = tempItem.getQuantity();
 						if (qty > 0) {
+							//update quantity in object and textview
 							tempItem.setQuantity(qty - 1);
 							txtQty.setText(String.valueOf(tempItem.getQuantity()));
 						}
 					}
 				});
 
+				//add listener to quantity textview to update quantity for object
 				txtQty.addTextChangedListener(new TextWatcher() {
 					@Override
 					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -174,8 +196,10 @@ public class FragMenu extends Fragment {
 					@Override
 					public void onTextChanged(CharSequence s, int start, int before, int count) {
 						if (s.toString().equals("")) {
+							//if quantity is blank, quantity is 0
 							tempItem.setQuantity(0);
 						} else {
+							//update quantity and keep in bounds 0 <= qty <= 99
 							int qty = Integer.valueOf(s.toString());
 							if (qty >= 0 && qty <= 99) tempItem.setQuantity(qty);
 							else if (qty > 99) tempItem.setQuantity(99);
@@ -189,17 +213,20 @@ public class FragMenu extends Fragment {
 					}
 				});
 
+				//use layout for invisible "button"
+				//set click listener to display food item description dialog
 				RelativeLayout descBox = (RelativeLayout) child.findViewById(R.id.click_desc);
-
 				descBox.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						//new dialog builder
 						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+						//inflate custom layout
 						LayoutInflater inflater = LayoutInflater.from(getActivity());
 						final View dialogView = inflater.inflate(R.layout.dialog_view_desc, null);
-
 						builder.setView(dialogView);
 
+						//get name and search for description of menu item
 						String name = txtName.getText().toString();
 						String desc = "";
 						for (int i = 0; i < listMenu.size(); i++) {
@@ -208,9 +235,11 @@ public class FragMenu extends Fragment {
 							}
 						}
 
+						//set dialog textviews' name and description
 						((TextView) dialogView.findViewById(R.id.food_name)).setText(name);
 						((TextView) dialogView.findViewById(R.id.food_desc)).setText(desc);
 
+						//set "Done" button click to close
 						builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int id) {
@@ -218,24 +247,31 @@ public class FragMenu extends Fragment {
 							}
 						});
 
+						//show the dialog
 						builder.create().show();
 					}
 				});
 
+				//add food item to menu
 				layout.addView(child);
 			}
 		}
 	}
 
+	//remake list of items ordered to send to order fragment
 	public ArrayList<String> getOrder() {
-		//remake list of items ordered
+		//reset list
 		listOrders.clear();
+		//create currency formatter
 		NumberFormat formatter = NumberFormat.getCurrencyInstance();
 		for (int i = 0; i < listMenu.size(); i++) {
+			//only add if user ordered more than 0 items and the item isn't a section header
 			if (listMenu.get(i).getQuantity() > 0 && !listMenu.get(i).isSection()) {
+				//format item name & price (e.g. "Item Name$3.49"
 				String name = listMenu.get(i).getName();
 				String price = formatter.format(listMenu.get(i).getPrice());
 				String item = name + price;
+				//add item to order array for as many as user ordered
 				for (int j = 0; j < listMenu.get(i).getQuantity(); j++) {
 					listOrders.add(item);
 				}

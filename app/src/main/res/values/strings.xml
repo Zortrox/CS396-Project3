@@ -1,5 +1,5 @@
 <resources>
-	<string name="app_name">CS396-Project3</string>
+	<string name="app_name">Patent Pending</string>
 	<string name="title_activity_main">Patent Pending</string>
 
 	<string name="navigation_drawer_open">Open navigation drawer</string>
