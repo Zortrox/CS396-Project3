@@ -7,7 +7,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textAppearance="?android:attr/textAppearanceLarge"
-			android:text="Edit Item"
+			android:text="Tip"
 			android:id="@+id/label_heading" android:layout_alignParentTop="true" android:layout_alignParentStart="true"
 			android:layout_alignParentEnd="true"
 			android:background="#70afc5" android:padding="10dp"/>
